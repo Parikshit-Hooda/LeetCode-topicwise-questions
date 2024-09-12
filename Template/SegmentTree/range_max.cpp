@@ -27,8 +27,8 @@ class SegTreeNode
     
     SegTreeNode(int a, int b, vector<int>& val)  // init for range [a,b] with the same-size array val
     {                 
-        lazy_tag = 0;
-        lazy_val = 0;
+        tag = 0;
+        info = 0;
         start = a, end = b;
         if (a==b)
         {
@@ -40,7 +40,7 @@ class SegTreeNode
         {
             left = new SegTreeNode(a, mid, val);
             right = new SegTreeNode(mid+1, b, val);            
-            info = left->info + right->info;  // check with your own logic
+            info = max(left->info, right->info);  // check with your own logic
         }        
     } 
     
@@ -80,7 +80,7 @@ class SegTreeNode
     {
         if (b < start || a > end )
         {
-            return INT_MIN;  // check with your own logic
+            return INT_MIN/2;  // check with your own logic
         }
         if (a <= start && end <=b)
         {
